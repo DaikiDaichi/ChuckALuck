@@ -13,6 +13,6 @@ How to install the needed libarys:
 
 Windows:
 	- CMD:
-      1. open CMD
-      2. type "python"
-      3. type "import /liabry_name/"
+ 			1. open CMD
+			2. type "python"
+	 		3. type "import /liabry_name/"
