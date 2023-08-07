@@ -33,6 +33,7 @@ dices = [d1, d2, d3]
 
 # buttons
 throw_button = TButton(colors["WEISS"], (250, 50), 100, 50, "werfen")
+change_screen_button = TButton(colors["WEISS"], (400, 50), 100, 50, "Lootbox")
 button1 = TButton(colors["WEISS"], (200, 330), 50, 50, "1")
 button2 = TButton(colors["WEISS"], (270, 330), 50, 50, "2")
 button3 = TButton(colors["WEISS"], (340, 330), 50, 50, "3")
@@ -40,7 +41,7 @@ button4 = TButton(colors["WEISS"], (200, 400), 50, 50, "4")
 button5 = TButton(colors["WEISS"], (270, 400), 50, 50, "5")
 button6 = TButton(colors["WEISS"], (340, 400), 50, 50, "6")
 
-buttons = [throw_button, button1, button2, button3, button4, button5, button6]
+buttons = [throw_button, change_screen_button, button1, button2, button3, button4, button5, button6]
 
 
 # create screen
@@ -75,7 +76,7 @@ while game_active:
                 for dice in dices:
                     dice.throw_dice()
 
-            for button in buttons[1:7]:
+            for button in buttons[2:7]:
                 if button.isOver(mouse_pos):
                     player_choice = button.text
 
