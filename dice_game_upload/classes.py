@@ -1,3 +1,4 @@
+# import json
 from random import randint
 import pygame
 
@@ -9,17 +10,18 @@ colors = {
     "ROT": (255, 0, 0),
     "GRUEN": (0, 255, 0),
     "SCHWARZ": (0, 0, 0),
-    "WEISS": (255, 255, 255)
+    "WEISS": (255, 255, 255),
+    "TURKIS": (137, 225, 209)
 }
 
 
-def screen_create(resolution=(640, 480), window_title="", picture="", color=(0, 0, 0)):
+def screen_create(resolution=(640, 480), window_title="", color=(0, 0, 0), picture=None):
     screen = pygame.display.set_mode(resolution)
     pygame.display.set_caption(window_title)
 
-    # when no image or wrong datatype is given the screen will be filled with the given color (default: black)
+    # when no image or wrong datatype is given, the screen will be filled with the given color (default: black)
     try:
-        if picture != "":
+        if picture is not None:
             screen.blit(picture, (0, 0))
         else:
             screen.fill(color)
@@ -38,7 +40,7 @@ class TLabel:
         self.text = new_text
 
     def draw(self, surface, font):
-        label = font.render(self.text, False, colors["GRUEN"])
+        label = font.render(self.text, False, colors["TURKIS"])
         surface.blit(label, self.location)
 
 
@@ -61,8 +63,9 @@ class TDice:
 
 
 class TKonto:
-    def __init__(self, balance=0):
+    def __init__(self, balance=0, owner="admin"):
         self.__balance = balance
+        self.__owner = owner
 
     def addCoin(self, amount):
         self.__balance += amount
@@ -72,6 +75,25 @@ class TKonto:
 
     def getBalance(self):
         return self.__balance
+
+    def getAttr(self):
+        return self.__owner, self.__balance
+
+    '''
+    def save_profile(self):
+        with open("assets/profile.json", "r") as readfile:
+            json_data = json.load(readfile)
+            for x, i in enumerate(json_data["konten"]):
+                if i["owner"] == self.getAttr()[0]:
+                    print(json_data["konten"][x])
+                    del json_data["konten"][x]
+
+            if self.getAttr()[0] != "Demo":
+                json_data["konten"].append({"owner": self.getAttr()[0], "balance": self.getAttr()[1]})
+
+        with open("assets/profile.json", "w") as wfile:
+            json.dump(json_data, wfile)
+    '''
 
 
 class TButton:
@@ -91,7 +113,7 @@ class TButton:
         pygame.draw.rect(surface, self.color, (self.x, self.y, self.width, self.height), 0)
 
         if self.text != '':
-            text = TButton.font.render(self.text, True, colors["GRUEN"])
+            text = TButton.font.render(self.text, True, colors["TURKIS"])
             surface.blit(text, (self.x + (self.width // 2 - text.get_width() // 2),
                                 self.y + (self.height // 2 - text.get_height() // 2)))
 
